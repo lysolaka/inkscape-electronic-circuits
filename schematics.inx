@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Electronic Symbols</name>
+    <id>draw.schematics</id>
+    <dependency type="executable" location="inx">schematics.py</dependency>
+    <dependency type="executable" location="extensions">inkscapeMadeEasy/inkscapeMadeEasy_Base.py</dependency>
+    <dependency type="executable" location="extensions">inkscapeMadeEasy/inkscapeMadeEasy_Draw.py</dependency>
+
+    <vbox>
+      <param name="action" type="notebook">
+        <page name="rlc" gui-text="RLC">
+          <hbox>
+            <vbox>
+              <param name="rlc_type" type="optiongroup" appearance="combo" gui-text="Component">
+                <option value="res">Resistor</option>
+                <option value="cap">Capacitor</option>
+                <option value="polcap">Polarized Capacitor</option>
+                <option value="ind">Inductor</option>
+                <option value="pot">Potentiometer</option>
+              </param>
+              <param name="rlc_do_variable" type="bool" gui-text="Variable">false</param>
+              <param name="rlc_draw_opts" type="optiongroup" appearance="radio" gui-text="Orientation">
+                <option value="horizontal">Horizontal</option>
+                <option value="vertical">Vertical</option>
+              </param>
+            </vbox>
+            <separator />
+            <vbox>
+              <param name="rlc_do_value" type="bool" gui-text="Draw Value">true</param>
+              <param name="rlc_value" type="string" gui-text="Value">100</param>
+              <param name="rlc_do_unit" type="bool" gui-text="Add unit">false</param>
+            </vbox>
+          </hbox>
+        </page>
+        <page name="tran" gui-text="Transistor">
+          <param name="tran_type" type="notebook">
+            <page name="bjt" gui-text="BJT">
+              <hbox>
+                <vbox>
+                  <param name="bjt_type" type="optiongroup" appearance="radio" gui-text="Type">
+                    <option value="npn">NPN</option>
+                    <option value="pnp">PNP</option>
+                  </param>
+                </vbox>
+                <spacer size="180" />
+                <separator />
+                <vbox>
+                  <param name="bjt_photo" type="bool" gui-text="Phototransistor">false</param>
+                  <param name="bjt_switch" type="bool" gui-text="Switch Collector/Emitter">false</param>
+                </vbox>
+              </hbox>
+            </page>
+            <page name="fet" gui-text="FET">
+              <hbox>
+                <vbox>
+                  <param name="fet_type" type="optiongroup" appearance="combo" gui-text="Type">
+                    <option value="mos_e">MOSFET Enhanced</option>
+                    <option value="mos_d">MOSFET Depleted</option>
+                    <option value="jfet">JFET</option>
+                    <option value="cmos">CMOS</option>
+                  </param>
+                  <param name="fet_symbol" type="optiongroup" appearance="radio" gui-text="MOSFET Symbol">
+                    <option value="3_term">3 terminal</option>
+                    <option value="4_term">4 terminal</option>
+                  </param>
+                  <param name="fet_channel" type="optiongroup" appearance="radio" gui-text="Channel type">
+                    <option value="negative">Negative</option>
+                    <option value="positive">Positive</option>
+                  </param>
+                </vbox>
+                <separator />
+                <vbox>
+                  <param name="fet_switch" type="bool" gui-text="Switch Source/Drain">false</param>
+                </vbox>
+              </hbox>
+            </page>
+          </param>
+          <param name="tran_do_envelope" type="bool" gui-text="Draw envelope">true</param>
+        </page>
+        <page name="diode" gui-text="Diode">
+          <param name="diode_type" type="optiongroup" appearance="combo" gui-text="Type">
+            <option value="regular">Regular</option>
+            <option value="led">LED</option>
+            <option value="schottky">Schottky</option>
+            <option value="zener">Zener</option>
+          </param>
+          <param name="diode_draw_opts" type="optiongroup" appearance="radio" gui-text="Orientation">
+            <option value="right">Right</option>
+            <option value="left">Left</option>
+            <option value="up">Up</option>
+            <option value="down">Down</option>
+          </param>
+        </page>
+      </param>
+      <separator />
+      <vbox>
+        <param name="do_designator" type="bool" gui-text="Draw Designator">true</param>
+        <param name="designator" type="string" gui-text="Designator">?</param>
+        <param name="do_latex_math" type="bool" gui-text="Use LaTeX's math mode">true</param>
+      </vbox>
+    </vbox>
+    <effect>
+        <object-type>all</object-type>
+        <effects-menu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">schematics.py</command>
+    </script>
+</inkscape-extension>

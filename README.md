@@ -15,19 +15,20 @@ __RLC__
 - Inductor
 - Potentiometer
 
-## TODO Symbols
-
 __Transistors__
 
 - BJT
   - NPN
   - PNP
   - Phototransistor (NPN and PNP)
-- FET
+  - IGBT
+- TODO: FET
   - MOSFET Enhanced
   - MOSFET Depleted
   - JFET
   - CMOS (MOSFET shorthand notation, I call it CMOS in my brain)
+
+## TODO Symbols
 
 __Diodes__
 

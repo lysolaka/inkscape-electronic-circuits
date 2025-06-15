@@ -40,7 +40,7 @@ class DrawRLC(inkBase.inkscapeMadeEasy):
 
         return value
 
-    def draw_label(
+    def draw_label_rlc(
         self,
         group,
         position: list[int],
@@ -60,13 +60,11 @@ class DrawRLC(inkBase.inkscapeMadeEasy):
         lower_side_pos = self.add(position, [size, hor_off])
 
         if opts.rlc.do_value and opts.do_designator:
-            designator = opts.designator
-            value = opts.rlc.value
             if opts.rlc.draw_opts == "vertical":
                 inkDraw.text.latex(
                     self,
                     group,
-                    designator,
+                    opts.designator,
                     upper_side_pos,
                     fontSize=5,
                     refPoint="bl",
@@ -74,7 +72,7 @@ class DrawRLC(inkBase.inkscapeMadeEasy):
                 inkDraw.text.latex(
                     self,
                     group,
-                    value,
+                    opts.rlc.value,
                     lower_side_pos,
                     fontSize=5,
                     refPoint="tl",
@@ -83,35 +81,33 @@ class DrawRLC(inkBase.inkscapeMadeEasy):
                 inkDraw.text.latex(
                     self,
                     group,
-                    designator,
+                    opts.designator,
                     upper_pos,
                     fontSize=5,
                     refPoint="bc",
                 )
                 inkDraw.text.latex(
-                    self, group, value, lower_pos, fontSize=5, refPoint="tc"
+                    self, group, opts.rlc.value, lower_pos, fontSize=5, refPoint="tc"
                 )
         elif opts.rlc.do_value:
-            value = opts.rlc.value
             if opts.rlc.draw_opts == "vertical":
                 inkDraw.text.latex(
-                    self, group, value, side_pos, fontSize=5, refPoint="cl"
+                    self, group, opts.rlc.value, side_pos, fontSize=5, refPoint="cl"
                 )
             elif opts.rlc.draw_opts == "horizontal":
                 inkDraw.text.latex(
-                    self, group, value, upper_pos, fontSize=5, refPoint="bc"
+                    self, group, opts.rlc.value, upper_pos, fontSize=5, refPoint="bc"
                 )
         elif opts.do_designator:
-            designator = opts.designator
             if opts.rlc.draw_opts == "vertical":
                 inkDraw.text.latex(
-                    self, group, designator, side_pos, fontSize=5, refPoint="cl"
+                    self, group, opts.designator, side_pos, fontSize=5, refPoint="cl"
                 )
             elif opts.rlc.draw_opts == "horizontal":
                 inkDraw.text.latex(
                     self,
                     group,
-                    designator,
+                    opts.designator,
                     upper_pos,
                     fontSize=5,
                     refPoint="bc",
@@ -129,8 +125,6 @@ class DrawRLC(inkBase.inkscapeMadeEasy):
         )
         inkDraw.line.relCoords(elem, [[5.5, 0]], self.add(position, [9.5, 0]))
 
-        _ = inkDraw.textStyle.setSimpleBlack(5, justification="center")
-
         if opts.rlc.do_variable:
             color = inkDraw.color.defined("black")
             arrow_len = 2.5
@@ -162,11 +156,8 @@ class DrawRLC(inkBase.inkscapeMadeEasy):
 
         if opts.rlc.draw_opts == "vertical":
             self.rotateElement(elem, position, 90)
-            _ = inkDraw.textStyle.setSimpleBlack(
-                5, justification="left"
-            )
 
-        self.draw_label(group, position, opts, 6, 1.5)
+        self.draw_label_rlc(group, position, opts, 6, 1.5)
 
     def draw_capacitor(self, parent, position: list[int], opts: Opts):
         group = self.createGroup(parent, "Capacitor")
@@ -177,8 +168,6 @@ class DrawRLC(inkBase.inkscapeMadeEasy):
         inkDraw.line.relCoords(elem, [[-13, 0]], self.add(position, [-2, 0]))
         inkDraw.line.relCoords(elem, [[0, -14]], self.add(position, [-2, 7]))
 
-        _ = inkDraw.textStyle.setSimpleBlack(5, justification="center")
-
         if opts.rlc.do_variable:
             color = inkDraw.color.defined("black")
             arrow_len = 2.5
@@ -210,11 +199,8 @@ class DrawRLC(inkBase.inkscapeMadeEasy):
 
         if opts.rlc.draw_opts == "vertical":
             self.rotateElement(elem, position, 90)
-            _ = inkDraw.textStyle.setSimpleBlack(
-                5, justification="left"
-            )
 
-        self.draw_label(group, position, opts, 10, 3)
+        self.draw_label_rlc(group, position, opts, 10, 3)
 
     def draw_polcapacitor(self, parent, position: list[int], opts: Opts):
         group = self.createGroup(parent, "Polarized Capacitor")
@@ -265,8 +251,6 @@ class DrawRLC(inkBase.inkscapeMadeEasy):
                 lineStyle=plus_sign,
             )
 
-        _ = inkDraw.textStyle.setSimpleBlack(5, justification="center")
-
         if opts.rlc.do_variable:
             color = inkDraw.color.defined("black")
             arrow_len = 2.5
@@ -298,11 +282,8 @@ class DrawRLC(inkBase.inkscapeMadeEasy):
 
         if opts.rlc.draw_opts == "vertical":
             self.rotateElement(elem, position, 90)
-            _ = inkDraw.textStyle.setSimpleBlack(
-                5, justification="left"
-            )
 
-        self.draw_label(group, position, opts, 10, 3)
+        self.draw_label_rlc(group, position, opts, 10, 3)
 
     def draw_inductor(self, parent, position: list[int], opts: Opts):
         group = self.createGroup(parent, "Inductor")
@@ -348,8 +329,6 @@ class DrawRLC(inkBase.inkscapeMadeEasy):
             largeArc=True,
         )
 
-        _ = inkDraw.textStyle.setSimpleBlack(5, justification="center")
-
         if opts.rlc.do_variable:
             color = inkDraw.color.defined("black")
             arrow_len = 2.5
@@ -381,11 +360,8 @@ class DrawRLC(inkBase.inkscapeMadeEasy):
 
         if opts.rlc.draw_opts == "vertical":
             self.rotateElement(elem, position, -90)
-            _ = inkDraw.textStyle.setSimpleBlack(
-                5, justification="left"
-            )
 
-        self.draw_label(group, position, opts, 6, 1.5)
+        self.draw_label_rlc(group, position, opts, 6, 1.5)
 
     def draw_potentiometer(self, parent, position: list[int], opts: Opts):
         group = self.createGroup(parent, "Potentiometer")
@@ -431,13 +407,8 @@ class DrawRLC(inkBase.inkscapeMadeEasy):
             lineStyle=line_style_arr,
         )
 
-        _ = inkDraw.textStyle.setSimpleBlack(5, justification="center")
-
         if opts.rlc.draw_opts == "vertical":
             self.rotateElement(elem, position, 90)
-            _ = inkDraw.textStyle.setSimpleBlack(
-                5, justification="left"
-            )
 
         upper_pos = self.add(position, [0, -6])
 
@@ -446,13 +417,11 @@ class DrawRLC(inkBase.inkscapeMadeEasy):
         lower_side_pos = self.add(position, [-6, 1.5])
 
         if opts.rlc.do_value and opts.do_designator:
-            designator = opts.designator
-            value = opts.rlc.value
             if opts.rlc.draw_opts == "vertical":
                 inkDraw.text.latex(
                     self,
                     group,
-                    designator,
+                    opts.designator,
                     upper_side_pos,
                     fontSize=5,
                     refPoint="br",
@@ -460,7 +429,7 @@ class DrawRLC(inkBase.inkscapeMadeEasy):
                 inkDraw.text.latex(
                     self,
                     group,
-                    value,
+                    opts.rlc.value,
                     lower_side_pos,
                     fontSize=5,
                     refPoint="tr",
@@ -469,7 +438,7 @@ class DrawRLC(inkBase.inkscapeMadeEasy):
                 inkDraw.text.latex(
                     self,
                     group,
-                    value,
+                    opts.rlc.value,
                     upper_pos,
                     fontSize=5,
                     refPoint="bc",
@@ -477,32 +446,30 @@ class DrawRLC(inkBase.inkscapeMadeEasy):
                 inkDraw.text.latex(
                     self,
                     group,
-                    designator,
+                    opts.designator,
                     self.add(upper_pos, [0, -7.5]),
                     fontSize=5,
                     refPoint="bc",
                 )
         elif opts.rlc.do_value:
-            value = opts.rlc.value
             if opts.rlc.draw_opts == "vertical":
                 inkDraw.text.latex(
-                    self, group, value, side_pos, fontSize=5, refPoint="cr"
+                    self, group, opts.rlc.value, side_pos, fontSize=5, refPoint="cr"
                 )
             elif opts.rlc.draw_opts == "horizontal":
                 inkDraw.text.latex(
-                    self, group, value, upper_pos, fontSize=5, refPoint="bc"
+                    self, group, opts.rlc.value, upper_pos, fontSize=5, refPoint="bc"
                 )
         elif opts.do_designator:
-            designator = opts.designator
             if opts.rlc.draw_opts == "vertical":
                 inkDraw.text.latex(
-                    self, group, designator, side_pos, fontSize=5, refPoint="cr"
+                    self, group, opts.designator, side_pos, fontSize=5, refPoint="cr"
                 )
             elif opts.rlc.draw_opts == "horizontal":
                 inkDraw.text.latex(
                     self,
                     group,
-                    designator,
+                    opts.designator,
                     upper_pos,
                     fontSize=5,
                     refPoint="bc",

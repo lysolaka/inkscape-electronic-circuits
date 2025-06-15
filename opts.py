@@ -33,12 +33,16 @@ class TranOpts:
             self.bjt = BJTOpts(opts)
         elif self.type == "fet":
             self.fet = FETOpts(opts)
+        self.orientation = opts.tran_orientation
         self.do_envelope = opts.tran_do_envelope
+        self.do_extra = opts.tran_do_extra
+        self.extra = opts.tran_extra
 
 
 class BJTOpts:
     def __init__(self, opts: Namespace) -> None:
         self.type = opts.bjt_type
+        self.igbt = opts.bjt_igbt
         self.photo = opts.bjt_photo
         self.switch = opts.bjt_switch
 

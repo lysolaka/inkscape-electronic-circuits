@@ -38,12 +38,13 @@
             <page name="bjt" gui-text="BJT">
               <hbox>
                 <vbox>
-                  <param name="bjt_type" type="optiongroup" appearance="radio" gui-text="Type">
+                  <param name="bjt_type" type="optiongroup" appearance="combo" gui-text="Type">
                     <option value="npn">NPN</option>
                     <option value="pnp">PNP</option>
                   </param>
+                  <param name="bjt_igbt" type="bool" gui-text="IGBT (Overrides Phototransistor)">false</param>
                 </vbox>
-                <spacer size="180" />
+                <spacer size="160" />
                 <separator />
                 <vbox>
                   <param name="bjt_photo" type="bool" gui-text="Phototransistor">false</param>
@@ -76,7 +77,13 @@
               </hbox>
             </page>
           </param>
+          <param name="tran_orientation" type="optiongroup" appearance="radio" gui-text="Orientation">
+            <option value="vertical">Vertical</option>
+            <option value="horizontal">Horizontal</option>
+          </param>
           <param name="tran_do_envelope" type="bool" gui-text="Draw envelope">true</param>
+          <param name="tran_do_extra" type="bool" gui-text="Draw extra info">false</param>
+          <param name="tran_extra" type="string" gui-text="Extra info (LaTeX capable)"></param>
         </page>
         <page name="diode" gui-text="Diode">
           <param name="diode_type" type="optiongroup" appearance="combo" gui-text="Type">

@@ -7,9 +7,10 @@ import inkscapeMadeEasy.inkscapeMadeEasy_Draw as inkDraw
 from opts import Opts
 
 from draw_rlc import DrawRLC
+from draw_tran import DrawTran
 
 
-class Schematics(DrawRLC):
+class Schematics(DrawRLC, DrawTran):
     def __init__(self):
         inkBase.inkscapeMadeEasy.__init__(self)
 
@@ -25,6 +26,7 @@ class Schematics(DrawRLC):
         self.arg_parser.add_argument("--tran_type", dest="tran_type")
 
         self.arg_parser.add_argument("--bjt_type", dest="bjt_type")
+        self.arg_parser.add_argument("--bjt_igbt", type=self.bool, dest="bjt_igbt")
         self.arg_parser.add_argument("--bjt_photo", type=self.bool, dest="bjt_photo")
         self.arg_parser.add_argument("--bjt_switch", type=self.bool, dest="bjt_switch")
 
@@ -33,7 +35,10 @@ class Schematics(DrawRLC):
         self.arg_parser.add_argument("--fet_channel", dest="fet_channel")
         self.arg_parser.add_argument("--fet_switch", type=self.bool, dest="fet_switch")
 
+        self.arg_parser.add_argument("--tran_orientation", dest="tran_orientation")
         self.arg_parser.add_argument("--tran_do_envelope", type=self.bool, dest="tran_do_envelope")
+        self.arg_parser.add_argument("--tran_do_extra", type=self.bool, dest="tran_do_extra")
+        self.arg_parser.add_argument("--tran_extra", dest="tran_extra")
 
         self.arg_parser.add_argument("--diode_type", dest="diode_type")
         self.arg_parser.add_argument("--diode_draw_opts", dest="diode_draw_opts")
@@ -68,7 +73,11 @@ class Schematics(DrawRLC):
                 self.draw_potentiometer(root_layer, position, opts)
 
         elif opts.action == "tran":
-            pass
+            if opts.tran.type == "bjt":
+                if opts.tran.bjt.igbt:
+                    self.draw_igbt(root_layer, position, opts)
+                else:
+                    self.draw_bjt(root_layer, position, opts)
         elif opts.action == "diode":
             pass
 

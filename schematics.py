@@ -2,6 +2,7 @@
 
 import math
 import inkscapeMadeEasy.inkscapeMadeEasy_Base as inkBase
+import inkscapeMadeEasy.inkscapeMadeEasy_Draw as inkDraw
 
 from opts import Opts
 
@@ -19,6 +20,7 @@ class Schematics(DrawRLC):
         self.arg_parser.add_argument("--rlc_do_value", type=self.bool, dest="rlc_do_value")
         self.arg_parser.add_argument("--rlc_value", dest="rlc_value")
         self.arg_parser.add_argument("--rlc_do_unit", type=self.bool, dest="rlc_do_unit")
+        self.arg_parser.add_argument("--rlc_do_latex_value", type=self.bool, dest="rlc_do_latex_value")
 
         self.arg_parser.add_argument("--tran_type", dest="tran_type")
 
@@ -40,7 +42,6 @@ class Schematics(DrawRLC):
         self.arg_parser.add_argument("--designator", dest="designator")
         self.arg_parser.add_argument("--do_latex_math", type=self.bool, dest="do_latex_math")
 
-
     def effect(self):
         opts = Opts(self.options)
 
@@ -50,26 +51,20 @@ class Schematics(DrawRLC):
         position[0] = int(math.ceil(position[0] / 10.0)) * 10
         position[1] = int(math.ceil(position[1] / 10.0)) * 10
 
+        if opts.do_latex_math:
+            opts.designator = '$' + opts.designator + '$'
+
         if opts.action == "rlc":
+            opts.rlc.value = self.parse_value(opts)
             if opts.rlc.type == "res":
-                if opts.rlc.do_unit:
-                    opts.rlc.value += r"\si\ohm"
                 self.draw_resistor(root_layer, position, opts)
             elif opts.rlc.type == "cap":
-                if opts.rlc.do_unit:
-                    opts.rlc.value += r"\si\farad"
                 self.draw_capacitor(root_layer, position, opts)
             elif opts.rlc.type == "polcap":
-                if opts.rlc.do_unit:
-                    opts.rlc.value += r"\si\farad"
                 self.draw_polcapacitor(root_layer, position, opts)
             elif opts.rlc.type == "ind":
-                if opts.rlc.do_unit:
-                    opts.rlc.value += r"\si\henry"
                 self.draw_inductor(root_layer, position, opts)
             elif opts.rlc.type == "pot":
-                if opts.rlc.do_unit:
-                    opts.rlc.value += r"\si\ohm"
                 self.draw_potentiometer(root_layer, position, opts)
 
         elif opts.action == "tran":

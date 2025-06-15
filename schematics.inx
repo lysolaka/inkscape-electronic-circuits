@@ -29,6 +29,7 @@
               <param name="rlc_do_value" type="bool" gui-text="Draw Value">true</param>
               <param name="rlc_value" type="string" gui-text="Value">100</param>
               <param name="rlc_do_unit" type="bool" gui-text="Add unit">false</param>
+              <param name="rlc_do_latex_value" type="bool" gui-text="Use LaTeX's math mode for the value">true</param>
             </vbox>
           </hbox>
         </page>
@@ -96,7 +97,7 @@
       <vbox>
         <param name="do_designator" type="bool" gui-text="Draw Designator">true</param>
         <param name="designator" type="string" gui-text="Designator">?</param>
-        <param name="do_latex_math" type="bool" gui-text="Use LaTeX's math mode">true</param>
+        <param name="do_latex_math" type="bool" gui-text="Use LaTeX's math mode for the designator">true</param>
       </vbox>
     </vbox>
     <effect>

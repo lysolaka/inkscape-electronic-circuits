@@ -5,10 +5,40 @@ import inkscapeMadeEasy.inkscapeMadeEasy_Draw as inkDraw
 
 from opts import Opts
 
+RLC_UNIT = {
+    "res": r"\si\ohm",
+    "cap": r"\si\farad",
+    "polcap": r"\si\farad",
+    "ind": r"\si\henry",
+    "pot": r"\si\ohm"
+}
+
+RLC_MUL = {
+    "f": r"\text{f}",
+    "p": r"\text{p}",
+    "n": r"\text{n}",
+    "u": r"\mu",
+    "m": r"\text{m}",
+    "k": r"\text{k}",
+    "M": r"\text{M}",
+    "G": r"\text{G}"
+}
+
 
 class DrawRLC(inkBase.inkscapeMadeEasy):
     def add(self, vector, delta):
         return vector + np.array(delta)
+
+    def parse_value(self, opts: Opts) -> str:
+        value = opts.rlc.value
+        if opts.rlc.do_latex_value:
+            if value[-1] in RLC_MUL:
+                value = value[:-1] + RLC_MUL[value[-1]]
+            if opts.rlc.do_unit:
+                value += RLC_UNIT[opts.rlc.type]
+            value = '$' + value + '$'
+
+        return value
 
     def draw_label(
         self,
@@ -30,8 +60,8 @@ class DrawRLC(inkBase.inkscapeMadeEasy):
         lower_side_pos = self.add(position, [size, hor_off])
 
         if opts.rlc.do_value and opts.do_designator:
-            designator = "$" + opts.designator + "$"
-            value = "$" + opts.rlc.value + "$"
+            designator = opts.designator
+            value = opts.rlc.value
             if opts.rlc.draw_opts == "vertical":
                 inkDraw.text.latex(
                     self,
@@ -62,7 +92,7 @@ class DrawRLC(inkBase.inkscapeMadeEasy):
                     self, group, value, lower_pos, fontSize=5, refPoint="tc"
                 )
         elif opts.rlc.do_value:
-            value = "$" + opts.rlc.value + "$"
+            value = opts.rlc.value
             if opts.rlc.draw_opts == "vertical":
                 inkDraw.text.latex(
                     self, group, value, side_pos, fontSize=5, refPoint="cl"
@@ -72,7 +102,7 @@ class DrawRLC(inkBase.inkscapeMadeEasy):
                     self, group, value, upper_pos, fontSize=5, refPoint="bc"
                 )
         elif opts.do_designator:
-            designator = "$" + opts.designator + "$"
+            designator = opts.designator
             if opts.rlc.draw_opts == "vertical":
                 inkDraw.text.latex(
                     self, group, designator, side_pos, fontSize=5, refPoint="cl"
@@ -416,8 +446,8 @@ class DrawRLC(inkBase.inkscapeMadeEasy):
         lower_side_pos = self.add(position, [-6, 1.5])
 
         if opts.rlc.do_value and opts.do_designator:
-            designator = "$" + opts.designator + "$"
-            value = "$" + opts.rlc.value + "$"
+            designator = opts.designator
+            value = opts.rlc.value
             if opts.rlc.draw_opts == "vertical":
                 inkDraw.text.latex(
                     self,
@@ -453,7 +483,7 @@ class DrawRLC(inkBase.inkscapeMadeEasy):
                     refPoint="bc",
                 )
         elif opts.rlc.do_value:
-            value = "$" + opts.rlc.value + "$"
+            value = opts.rlc.value
             if opts.rlc.draw_opts == "vertical":
                 inkDraw.text.latex(
                     self, group, value, side_pos, fontSize=5, refPoint="cr"
@@ -463,7 +493,7 @@ class DrawRLC(inkBase.inkscapeMadeEasy):
                     self, group, value, upper_pos, fontSize=5, refPoint="bc"
                 )
         elif opts.do_designator:
-            designator = "$" + opts.designator + "$"
+            designator = opts.designator
             if opts.rlc.draw_opts == "vertical":
                 inkDraw.text.latex(
                     self, group, designator, side_pos, fontSize=5, refPoint="cr"

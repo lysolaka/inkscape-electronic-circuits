@@ -23,6 +23,7 @@ class RLCOpts:
         self.do_value = opts.rlc_do_value
         self.value = opts.rlc_value
         self.do_unit = opts.rlc_do_unit
+        self.do_latex_value = opts.rlc_do_latex_value
 
 
 class TranOpts:

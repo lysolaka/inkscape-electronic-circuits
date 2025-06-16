@@ -78,6 +78,14 @@ class Schematics(DrawRLC, DrawTran):
                     self.draw_igbt(root_layer, position, opts)
                 else:
                     self.draw_bjt(root_layer, position, opts)
+            elif opts.tran.type == "fet":
+                if opts.tran.fet.type == "mos_e" or opts.tran.fet.type == "mos_d":
+                    self.draw_mosfet(root_layer, position, opts)
+                elif opts.tran.fet.type == "jfet":
+                    self.draw_jfet(root_layer, position, opts)
+                elif opts.tran.fet.type == "cmos_e" or opts.tran.fet.type == "cmos_d":
+                    self.draw_cmos(root_layer, position, opts)
+
         elif opts.action == "diode":
             pass
 

@@ -44,7 +44,6 @@
                   </param>
                   <param name="bjt_igbt" type="bool" gui-text="IGBT (Overrides Phototransistor)">false</param>
                 </vbox>
-                <spacer size="160" />
                 <separator />
                 <vbox>
                   <param name="bjt_photo" type="bool" gui-text="Phototransistor">false</param>
@@ -59,7 +58,8 @@
                     <option value="mos_e">MOSFET Enhanced</option>
                     <option value="mos_d">MOSFET Depleted</option>
                     <option value="jfet">JFET</option>
-                    <option value="cmos">CMOS</option>
+                    <option value="cmos_e">Shorthand MOSFET-E</option>
+                    <option value="cmos_d">Shorthand MOSFET-D</option>
                   </param>
                   <param name="fet_symbol" type="optiongroup" appearance="radio" gui-text="MOSFET Symbol">
                     <option value="3_term">3 terminal</option>
@@ -89,6 +89,7 @@
           <param name="diode_type" type="optiongroup" appearance="combo" gui-text="Type">
             <option value="regular">Regular</option>
             <option value="led">LED</option>
+            <option value="photo">Photo Diode</option>
             <option value="schottky">Schottky</option>
             <option value="zener">Zener</option>
           </param>

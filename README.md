@@ -22,11 +22,12 @@ __Transistors__
   - PNP
   - Phototransistor (NPN and PNP)
   - IGBT
-- TODO: FET
+- FET
   - MOSFET Enhanced
   - MOSFET Depleted
   - JFET
-  - CMOS (MOSFET shorthand notation, I call it CMOS in my brain)
+  - Shorthand MOSFET-E
+  - Shorthand MOSFET-D
 
 ## TODO Symbols
 

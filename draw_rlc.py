@@ -36,7 +36,7 @@ class DrawRLC(inkBase.inkscapeMadeEasy):
                 value = value[:-1] + RLC_MUL[value[-1]]
             if opts.rlc.do_unit:
                 value += RLC_UNIT[opts.rlc.type]
-            value = '$' + value + '$'
+            value = "$" + value + "$"
 
         return value
 

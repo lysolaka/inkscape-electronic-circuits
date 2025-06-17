@@ -86,19 +86,31 @@
           <param name="tran_extra" type="string" gui-text="Extra info (LaTeX capable)"></param>
         </page>
         <page name="diode" gui-text="Diode">
-          <param name="diode_type" type="optiongroup" appearance="combo" gui-text="Type">
-            <option value="regular">Regular</option>
-            <option value="led">LED</option>
-            <option value="photo">Photo Diode</option>
-            <option value="schottky">Schottky</option>
-            <option value="zener">Zener</option>
-          </param>
-          <param name="diode_draw_opts" type="optiongroup" appearance="radio" gui-text="Orientation">
-            <option value="right">Right</option>
-            <option value="left">Left</option>
-            <option value="up">Up</option>
-            <option value="down">Down</option>
-          </param>
+          <hbox>
+            <vbox>
+              <param name="diode_type" type="optiongroup" appearance="combo" gui-text="Type">
+                <option value="regular">Regular</option>
+                <option value="led">LED</option>
+                <option value="photo">Photo Diode</option>
+                <option value="schottky">Schottky</option>
+                <option value="zener">Zener</option>
+              </param>
+              <param name="diode_draw_opts" type="optiongroup" appearance="radio" gui-text="Orientation">
+                <option value="right">Right</option>
+                <option value="left">Left</option>
+                <option value="up">Up</option>
+                <option value="down">Down</option>
+              </param>
+            </vbox>
+            <separator />
+            <vbox>
+              <param name="diode_do_extra" type="bool" gui-text="Draw extra info">false</param>
+              <param name="diode_extra" type="string" gui-text="Extra info (LaTeX capable)"></param>
+              <separator />
+              <label appearance="header">Diode color fill</label>
+              <param name="diode_fill" type="color" gui-text="Diode color fill">0x00000000</param>
+            </vbox>
+          </hbox>
         </page>
       </param>
       <separator />

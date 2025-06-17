@@ -29,8 +29,6 @@ __Transistors__
   - Shorthand MOSFET-E
   - Shorthand MOSFET-D
 
-## TODO Symbols
-
 __Diodes__
 
 - Regular
@@ -38,4 +36,6 @@ __Diodes__
 - Schottky
 - Zener
 
-Also voltage, current sources, ground, terminals (signals), transformers, switches (maybe).
+## TODO symbols
+
+Voltage, current sources, ground, terminals (signals), transformers, switches (maybe).

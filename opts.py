@@ -59,3 +59,6 @@ class DOpts:
     def __init__(self, opts: Namespace) -> None:
         self.type = opts.diode_type
         self.draw_opts = opts.diode_draw_opts
+        self.do_extra = opts.diode_do_extra
+        self.extra = opts.diode_extra
+        self.fill = "#" + format(int(opts.diode_fill), "08x")

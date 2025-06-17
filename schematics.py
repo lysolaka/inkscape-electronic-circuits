@@ -8,9 +8,10 @@ from opts import Opts
 
 from draw_rlc import DrawRLC
 from draw_tran import DrawTran
+from draw_diode import DrawDiode
 
 
-class Schematics(DrawRLC, DrawTran):
+class Schematics(DrawRLC, DrawTran, DrawDiode):
     def __init__(self):
         inkBase.inkscapeMadeEasy.__init__(self)
 
@@ -42,6 +43,10 @@ class Schematics(DrawRLC, DrawTran):
 
         self.arg_parser.add_argument("--diode_type", dest="diode_type")
         self.arg_parser.add_argument("--diode_draw_opts", dest="diode_draw_opts")
+        self.arg_parser.add_argument("--diode_do_extra", type=self.bool, dest="diode_do_extra")
+        self.arg_parser.add_argument("--diode_extra", dest="diode_extra")
+        self.arg_parser.add_argument("--diode_fill", dest="diode_fill")
+
 
         self.arg_parser.add_argument("--do_designator", type=self.bool, dest="do_designator")
         self.arg_parser.add_argument("--designator", dest="designator")
@@ -57,7 +62,7 @@ class Schematics(DrawRLC, DrawTran):
         position[1] = int(math.ceil(position[1] / 10.0)) * 10
 
         if opts.do_latex_math:
-            opts.designator = '$' + opts.designator + '$'
+            opts.designator = "$" + opts.designator + "$"
 
         if opts.action == "rlc":
             opts.rlc.value = self.parse_value(opts)
@@ -87,7 +92,7 @@ class Schematics(DrawRLC, DrawTran):
                     self.draw_cmos(root_layer, position, opts)
 
         elif opts.action == "diode":
-            pass
+            self.draw_diode(root_layer, position, opts)
 
 
 # class TextOpts:

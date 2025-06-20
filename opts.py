@@ -13,6 +13,8 @@ class Opts:
             self.tran = TranOpts(opts)
         elif self.action == "diode":
             self.diode = DOpts(opts)
+        elif self.action == "source":
+            self.source = SourceOpts(opts)
 
 
 class RLCOpts:
@@ -62,3 +64,14 @@ class DOpts:
         self.do_extra = opts.diode_do_extra
         self.extra = opts.diode_extra
         self.fill = "#" + format(int(opts.diode_fill), "08x")
+
+
+class SourceOpts:
+    def __init__(self, opts: Namespace) -> None:
+        self.type = opts.source_type
+        self.do_invert = opts.source_do_invert
+        self.draw_opts = opts.source_draw_opts
+        self.do_value = opts.source_do_value
+        self.value = opts.source_value
+        self.do_unit = opts.source_do_unit
+        self.do_latex_value = opts.source_do_latex_value

@@ -29,9 +29,9 @@ class DrawRLC(inkBase.inkscapeMadeEasy):
     def add(self, vector, delta):
         return vector + np.array(delta)
 
-    def parse_value(self, opts: Opts) -> str:
+    def parse_value_rlc(self, opts: Opts) -> str:
         value = opts.rlc.value
-        if opts.rlc.do_latex_value:
+        if opts.rlc.do_latex_value and value is not None:
             if value[-1] in RLC_MUL:
                 value = value[:-1] + RLC_MUL[value[-1]]
             if opts.rlc.do_unit:

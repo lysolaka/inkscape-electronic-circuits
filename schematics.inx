@@ -107,8 +107,32 @@
               <param name="diode_do_extra" type="bool" gui-text="Draw extra info">false</param>
               <param name="diode_extra" type="string" gui-text="Extra info (LaTeX capable)"></param>
               <separator />
-              <label appearance="header">Diode color fill</label>
+              <label>Diode color fill</label>
               <param name="diode_fill" type="color" gui-text="Diode color fill">0x00000000</param>
+            </vbox>
+          </hbox>
+        </page>
+        <page name="source" gui-text="Source">
+          <hbox>
+            <vbox>
+              <param name="source_type" type="optiongroup" appearance="combo" gui-text="Type">
+                <option value="voltage">Voltage</option>
+                <option value="voltage_ac">AC Voltage</option>
+                <option value="current_1">Current</option>
+                <option value="current_2">Current (2nd form)</option>
+              </param>
+              <param name="source_do_invert" type="bool" gui-text="Invert source arrow">false</param>
+              <param name="source_draw_opts" type="optiongroup" appearance="radio" gui-text="Orientation">
+                <option value="vertical">Vertical</option>
+                <option value="horizontal">Horizontal</option>
+              </param>
+            </vbox>
+            <separator />
+            <vbox>
+              <param name="source_do_value" type="bool" gui-text="Draw Value">true</param>
+              <param name="source_value" type="string" gui-text="Value">5</param>
+              <param name="source_do_unit" type="bool" gui-text="Add unit">false</param>
+              <param name="source_do_latex_value" type="bool" gui-text="Use LaTeX's math mode for the value">true</param>
             </vbox>
           </hbox>
         </page>

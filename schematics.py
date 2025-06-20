@@ -9,9 +9,10 @@ from opts import Opts
 from draw_rlc import DrawRLC
 from draw_tran import DrawTran
 from draw_diode import DrawDiode
+from draw_source import DrawSource
 
 
-class Schematics(DrawRLC, DrawTran, DrawDiode):
+class Schematics(DrawRLC, DrawTran, DrawDiode, DrawSource):
     def __init__(self):
         inkBase.inkscapeMadeEasy.__init__(self)
 
@@ -47,6 +48,14 @@ class Schematics(DrawRLC, DrawTran, DrawDiode):
         self.arg_parser.add_argument("--diode_extra", dest="diode_extra")
         self.arg_parser.add_argument("--diode_fill", dest="diode_fill")
 
+        self.arg_parser.add_argument("--source_type", dest="source_type")
+        self.arg_parser.add_argument("--source_do_invert", type=self.bool, dest="source_do_invert")
+        self.arg_parser.add_argument("--source_draw_opts", dest="source_draw_opts")
+        self.arg_parser.add_argument("--source_do_value", type=self.bool, dest="source_do_value")
+        self.arg_parser.add_argument("--source_value", dest="source_value")
+        self.arg_parser.add_argument("--source_do_unit", type=self.bool, dest="source_do_unit")
+        self.arg_parser.add_argument("--source_do_latex_value", type=self.bool, dest="source_do_latex_value")
+
 
         self.arg_parser.add_argument("--do_designator", type=self.bool, dest="do_designator")
         self.arg_parser.add_argument("--designator", dest="designator")
@@ -61,11 +70,11 @@ class Schematics(DrawRLC, DrawTran, DrawDiode):
         position[0] = int(math.ceil(position[0] / 10.0)) * 10
         position[1] = int(math.ceil(position[1] / 10.0)) * 10
 
-        if opts.do_latex_math:
+        if opts.do_latex_math and opts.do_designator:
             opts.designator = "$" + opts.designator + "$"
 
         if opts.action == "rlc":
-            opts.rlc.value = self.parse_value(opts)
+            opts.rlc.value = self.parse_value_rlc(opts)
             if opts.rlc.type == "res":
                 self.draw_resistor(root_layer, position, opts)
             elif opts.rlc.type == "cap":
@@ -93,6 +102,17 @@ class Schematics(DrawRLC, DrawTran, DrawDiode):
 
         elif opts.action == "diode":
             self.draw_diode(root_layer, position, opts)
+
+        elif opts.action == "source":
+            opts.source.value = self.parse_value_source(opts)
+            if opts.source.type == "voltage":
+                self.draw_voltage(root_layer, position, opts)
+            elif opts.source.type == "voltage_ac":
+                self.draw_voltage_ac(root_layer, position, opts)
+            elif opts.source.type == "current_1":
+                self.draw_current1(root_layer, position, opts)
+            elif opts.source.type == "current_2":
+                self.draw_current2(root_layer, position, opts)
 
 
 # class TextOpts:

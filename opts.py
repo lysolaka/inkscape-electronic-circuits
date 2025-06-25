@@ -15,6 +15,8 @@ class Opts:
             self.diode = DOpts(opts)
         elif self.action == "source":
             self.source = SourceOpts(opts)
+        elif self.action == "misc":
+            self.misc = MiscOpts(opts)
 
 
 class RLCOpts:
@@ -75,3 +77,11 @@ class SourceOpts:
         self.value = opts.source_value
         self.do_unit = opts.source_do_unit
         self.do_latex_value = opts.source_do_latex_value
+
+class MiscOpts:
+    def __init__(self, opts: Namespace) -> None:
+        self.type = opts.misc_type
+        self.draw_opts = opts.misc_draw_opts
+        self.do_value = opts.misc_do_value
+        self.value = opts.misc_value
+        self.do_latex_value = opts.misc_do_latex_value

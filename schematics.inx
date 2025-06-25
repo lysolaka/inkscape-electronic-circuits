@@ -136,6 +136,33 @@
             </vbox>
           </hbox>
         </page>
+        <page name="misc" gui-text="Misc">
+          <hbox>
+            <vbox>
+              <param name="misc_type" type="optiongroup" appearance="combo" gui-text="Symbol">
+                <option value="signal">Signal</option>
+                <option value="gnd">GND</option>
+                <option value="dot">Connection dot</option>
+              </param>
+              <param name="misc_draw_opts" type="optiongroup" appearance="radio" gui-text="Orientation">
+                <option value="left">Left</option>
+                <option value="right">Right</option>
+                <option value="up">Up</option>
+                <option value="down">Down</option>
+              </param>
+            </vbox>
+            <separator />
+            <vbox>
+              <param name="misc_do_value" type="bool" gui-text="Draw Value">false</param>
+              <param name="misc_value" type="string" gui-text="Value"></param>
+              <param name="misc_do_latex_value" type="bool" gui-text="Use LaTeX's math mode for the value">true</param>
+            </vbox>
+          </hbox>
+          <separator />
+          <label appearance="header">Info</label>
+          <label>GND does not draw any text</label>
+          <label>Connection dot does not respect any options</label>
+        </page>
       </param>
       <separator />
       <vbox>

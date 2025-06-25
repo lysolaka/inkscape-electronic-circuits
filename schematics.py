@@ -10,9 +10,10 @@ from draw_rlc import DrawRLC
 from draw_tran import DrawTran
 from draw_diode import DrawDiode
 from draw_source import DrawSource
+from draw_misc import DrawMisc
 
 
-class Schematics(DrawRLC, DrawTran, DrawDiode, DrawSource):
+class Schematics(DrawRLC, DrawTran, DrawDiode, DrawSource, DrawMisc):
     def __init__(self):
         inkBase.inkscapeMadeEasy.__init__(self)
 
@@ -56,6 +57,11 @@ class Schematics(DrawRLC, DrawTran, DrawDiode, DrawSource):
         self.arg_parser.add_argument("--source_do_unit", type=self.bool, dest="source_do_unit")
         self.arg_parser.add_argument("--source_do_latex_value", type=self.bool, dest="source_do_latex_value")
 
+        self.arg_parser.add_argument("--misc_type", dest="misc_type")
+        self.arg_parser.add_argument("--misc_draw_opts", dest="misc_draw_opts")
+        self.arg_parser.add_argument("--misc_do_value", type=self.bool, dest="misc_do_value")
+        self.arg_parser.add_argument("--misc_value", dest="misc_value")
+        self.arg_parser.add_argument("--misc_do_latex_value", type=self.bool, dest="misc_do_latex_value")
 
         self.arg_parser.add_argument("--do_designator", type=self.bool, dest="do_designator")
         self.arg_parser.add_argument("--designator", dest="designator")
@@ -113,6 +119,15 @@ class Schematics(DrawRLC, DrawTran, DrawDiode, DrawSource):
                 self.draw_current1(root_layer, position, opts)
             elif opts.source.type == "current_2":
                 self.draw_current2(root_layer, position, opts)
+
+        elif opts.action == "misc":
+            opts.misc.value = self.parse_value_misc(opts)
+            if opts.misc.type == "signal":
+                self.draw_signal(root_layer, position, opts)
+            elif opts.misc.type == "gnd":
+                self.draw_gnd(root_layer, position, opts)
+            elif opts.misc.type == "dot":
+                self.draw_dot(root_layer, position)
 
 
 # class TextOpts:

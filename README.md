@@ -36,6 +36,14 @@ __Diodes__
 - Schottky
 - Zener
 
-## TODO symbols
+__Sources__
+- Voltage
+- Current
 
-Voltage, current sources, ground, terminals (signals), transformers, switches (maybe).
+__Misc__
+- Signals
+- Ground
+- Connection dot
+
+## TODO Symbols
+transformers and switches (maybe)
